@@ -11,8 +11,8 @@ import (
 	"fmt"
 )
 
-// QueryProject handle
-func QueryProject(username string) []model.Project {
+// QueryProjectByUsername handle
+func QueryProjectByUsername(username string) []model.Project {
 	cursor, err := model.Query("Platform", "Projects", bson.M{"user": username})
 	if err != nil {
 		fmt.Println(err)
@@ -36,11 +36,42 @@ func QueryProject(username string) []model.Project {
 
 }
 
+// QueryProjectByID handle
+func QueryProjectByID(id string) *model.Project {
+	ido, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		return &model.Project{}
+	}
+	cursor, err := model.Query("Platform", "Projects", bson.M{"_id": ido})
+	if err != nil {
+		fmt.Println(err)
+		return &model.Project{}
+	}
+	var result model.Project
+	for cursor.Next(context.TODO()) {
+		var elem model.Project
+		err := cursor.Decode(&elem)
+		if err != nil {
+			fmt.Println(err)
+			return &model.Project{}
+		}
+	}
+	if err := cursor.Err(); err != nil {
+		fmt.Println(err)
+		return &model.Project{}
+	}
+	cursor.Close(context.TODO())
+	return &result
+
+}
+
 // InsertProject handle
 func InsertProject(project *model.Project) bool {
-	err := model.Insert("Platform", "Projects", bson.D{
-		{"user", project.User},
-		{"value", project.Value},
+	err := model.Insert("Platform", "Projects", bson.M{
+		"user":  project.User,
+		"score": 0,
+		"ip":    project.IP,
+		"map":   project.Map,
 	})
 	if err != nil {
 		return false
@@ -57,7 +88,9 @@ func UpdateProject(project *model.Project) bool {
 	return model.Update("Platform", "Projects", bson.M{
 		"$set": bson.M{
 			"user":  project.User,
-			"value": project.Value,
+			"score": 0,
+			"ip":    project.IP,
+			"map":   project.Map,
 		},
 	}, bson.M{"_id": id})
 }

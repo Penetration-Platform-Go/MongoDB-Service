@@ -27,7 +27,7 @@ func Query(database string, collection string, filter bson.M) (*mongo.Cursor, er
 }
 
 // Insert Method by database, collection and value
-func Insert(database string, collection string, value bson.D) error {
+func Insert(database string, collection string, value bson.M) error {
 
 	fmt.Print("Insert: " + database + " " + collection + " with value:")
 	fmt.Println(value)

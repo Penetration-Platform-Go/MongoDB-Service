@@ -3,6 +3,7 @@ package model
 import (
 	"context"
 
+	mongodb "github.com/Penetration-Platform-Go/gRPC-Files/MongoDB-Service"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -22,7 +23,9 @@ func init() {
 
 // Project define
 type Project struct {
-	ID    string `bson:"_id"`
-	User  string `bson:"user"`
-	Value string `bson:"value"`
+	ID    string        `bson:"_id"`
+	User  string        `bson:"user"`
+	Score int32         `bson:"score"`
+	IP    []*mongodb.Ip `bson:"ip"`
+	Map   *mongodb.Map  `bson:"map"`
 }
