@@ -64,12 +64,12 @@ func Delete(database string, collection string, filter bson.M) bool {
 	fmt.Print("Delete: " + database + " " + collection + " with filter:")
 	fmt.Println(filter)
 
-	result, err := getCollection(database, collection).DeleteOne(context.TODO(), filter)
+	result, err := getCollection(database, collection).DeleteMany(context.TODO(), filter)
 	if err != nil {
 		fmt.Println(err)
 		return false
 	}
-	if result.DeletedCount != 1 {
+	if result.DeletedCount < 1 {
 		return false
 	}
 

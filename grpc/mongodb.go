@@ -12,9 +12,9 @@ import (
 type MongoDBService struct {
 }
 
-// QueryProjectsByUsername method Query Projects By Username
-func (u *MongoDBService) QueryProjectsByUsername(user *mongodb.Username, stream mongodb.MongoDB_QueryProjectsByUsernameServer) error {
-	result := controller.QueryProjectByUsername(user.Username)
+// QueryProjects method Query Projects By Condition
+func (u *MongoDBService) QueryProjects(condition *mongodb.Condition, stream mongodb.MongoDB_QueryProjectsServer) error {
+	result := controller.QueryProjects(condition.Value)
 	for _, val := range result {
 		if err := stream.Send(&mongodb.ProjectInformation{
 			Id:    val.ID,
@@ -28,19 +28,6 @@ func (u *MongoDBService) QueryProjectsByUsername(user *mongodb.Username, stream 
 	}
 
 	return nil
-}
-
-// QueryProjectsByID method Query Projects By Username
-func (u *MongoDBService) QueryProjectsByID(ctx context.Context, projectId *mongodb.ProjectId) (*mongodb.ProjectInformation, error) {
-	result := controller.QueryProjectByID(projectId.Id)
-	return &mongodb.ProjectInformation{
-		Id:    result.ID,
-		User:  result.User,
-		Score: result.Score,
-		Ip:    result.IP,
-		Map:   result.Map,
-	}, nil
-
 }
 
 // InsertProject method
@@ -73,8 +60,8 @@ func (u *MongoDBService) UpdateProject(ctx context.Context, project *mongodb.Pro
 }
 
 // DeleteProject method
-func (u *MongoDBService) DeleteProject(ctx context.Context, project *mongodb.ProjectId) (*mongodb.Result, error) {
-	result := controller.DeleteProject(project.Id)
+func (u *MongoDBService) DeleteProject(ctx context.Context, condition *mongodb.Condition) (*mongodb.Result, error) {
+	result := controller.DeleteProject(condition.Value)
 	return &mongodb.Result{
 		IsVaild: result,
 		Value:   "Failed",
