@@ -6,6 +6,7 @@ import (
 	"github.com/Penetration-Platform-Go/MongoDB-Service/controller"
 	"github.com/Penetration-Platform-Go/MongoDB-Service/model"
 	mongodb "github.com/Penetration-Platform-Go/gRPC-Files/MongoDB-Service"
+	"go.mongodb.org/mongo-driver/bson"
 )
 
 // MongoDBService define
@@ -45,13 +46,13 @@ func (u *MongoDBService) InsertProject(ctx context.Context, project *mongodb.Pro
 }
 
 // UpdateProject method
-func (u *MongoDBService) UpdateProject(ctx context.Context, project *mongodb.ProjectInformation) (*mongodb.Result, error) {
-	result := controller.UpdateProject(&model.Project{
-		ID:    project.Id,
-		User:  project.User,
-		Score: project.Score,
-		IP:    project.Ip,
-		Map:   project.Map,
+func (u *MongoDBService) UpdateProject(ctx context.Context, message *mongodb.UpdateMessage) (*mongodb.Result, error) {
+	result := controller.UpdateProject(message.Condition.Value, message.Key, bson.M{
+		"_id":   message.Value.Id,
+		"user":  message.Value.User,
+		"score": message.Value.Score,
+		"ip":    message.Value.Ip,
+		"map":   message.Value.Map,
 	})
 	return &mongodb.Result{
 		IsVaild: result,

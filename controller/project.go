@@ -64,18 +64,26 @@ func InsertProject(project *model.Project) bool {
 }
 
 // UpdateProject handle
-func UpdateProject(project *model.Project) bool {
-	id, err := primitive.ObjectIDFromHex(project.ID)
-	if err != nil {
-		return false
+func UpdateProject(condition []*mongodb.Value, key []string, value bson.M) bool {
+	filter := make(map[string]interface{})
+	for _, con := range condition {
+		filter[con.Key] = con.Value
+		if con.Key == "_id" {
+			ido, err := primitive.ObjectIDFromHex(con.Value)
+			if err != nil {
+				fmt.Println(err)
+				return false
+			}
+			filter[con.Key] = ido
+		}
+	}
+	val := make(map[string]interface{})
+	for _, con := range key {
+		val[con] = value[con]
 	}
 	return model.Update("Platform", "Projects", bson.M{
-		"$set": bson.M{
-			"score": project.Score,
-			"ip":    project.IP,
-			"map":   project.Map,
-		},
-	}, bson.M{"_id": id})
+		"$set": val,
+	}, filter)
 }
 
 // DeleteProject handle
@@ -92,8 +100,6 @@ func DeleteProject(condition []*mongodb.Value) bool {
 			filter[con.Key] = ido
 		}
 	}
-
-	fmt.Println(filter)
 
 	return model.Delete("Platform", "Projects", filter)
 

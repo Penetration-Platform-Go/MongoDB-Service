@@ -4,7 +4,7 @@ go 1.12
 
 require (
 	github.com/DataDog/zstd v1.4.4 // indirect
-	github.com/Penetration-Platform-Go/gRPC-Files v0.0.0-20200206065527-66f99b722a5a
+	github.com/Penetration-Platform-Go/gRPC-Files v0.0.0-20200206090123-802f27655682
 	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
