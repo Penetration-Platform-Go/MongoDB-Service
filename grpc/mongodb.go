@@ -21,6 +21,7 @@ func (u *MongoDBService) QueryProjects(condition *mongodb.Condition, stream mong
 			Id:    val.ID,
 			User:  val.User,
 			Score: val.Score,
+			Title: val.Title,
 			Ip:    val.IP,
 			Map:   val.Map,
 		}); err != nil {
@@ -36,6 +37,7 @@ func (u *MongoDBService) InsertProject(ctx context.Context, project *mongodb.Pro
 	result := controller.InsertProject(&model.Project{
 		User:  project.User,
 		Score: project.Score,
+		Title: project.Title,
 		IP:    project.Ip,
 		Map:   project.Map,
 	})
@@ -50,6 +52,7 @@ func (u *MongoDBService) UpdateProject(ctx context.Context, message *mongodb.Upd
 	result := controller.UpdateProject(message.Condition.Value, message.Key, bson.M{
 		"_id":   message.Value.Id,
 		"user":  message.Value.User,
+		"title": message.Value.Title,
 		"score": message.Value.Score,
 		"ip":    message.Value.Ip,
 		"map":   message.Value.Map,

@@ -54,6 +54,7 @@ func InsertProject(project *model.Project) bool {
 	err := model.Insert("Platform", "Projects", bson.M{
 		"user":  project.User,
 		"score": 0,
+		"title": project.Title,
 		"ip":    project.IP,
 		"map":   project.Map,
 	})
