@@ -71,3 +71,23 @@ func (u *MongoDBService) DeleteProject(ctx context.Context, condition *mongodb.C
 		Value:   "Failed",
 	}, nil
 }
+
+// QueryViews method
+func (u *MongoDBService) QueryViews(condition *mongodb.Condition, stream mongodb.MongoDB_QueryViewsServer) error {
+	result := controller.QueryViews(condition.Value)
+	for _, val := range result {
+		if err := stream.Send(&mongodb.Views{
+			Key:   val.Key,
+			Value: val.Value,
+		}); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// AddViews method
+func (u *MongoDBService) AddViews(ctx context.Context, empty *mongodb.Empty) (*mongodb.Empty, error) {
+	controller.AddViews()
+	return &mongodb.Empty{}, nil
+}

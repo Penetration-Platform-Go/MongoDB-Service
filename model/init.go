@@ -30,3 +30,9 @@ type Project struct {
 	IP    []*mongodb.Ip `bson:"ip"`
 	Map   *mongodb.Map  `bson:"map"`
 }
+
+// Views define
+type Views struct {
+	Key   string `bson:"key"`
+	Value int32  `bson:"value"`
+}
