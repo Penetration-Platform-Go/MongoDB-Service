@@ -23,12 +23,12 @@ func init() {
 
 // Project define
 type Project struct {
-	ID    string        `bson:"_id"`
-	User  string        `bson:"user"`
-	Title string        `bson:"title"`
-	Score int32         `bson:"score"`
-	IP    []*mongodb.Ip `bson:"ip"`
-	Map   *mongodb.Map  `bson:"map"`
+	ID        string               `bson:"_id"`
+	User      string               `bson:"user"`
+	Title     string               `bson:"title"`
+	Score     int32                `bson:"score"`
+	Equipment []*mongodb.Equipment `bson:"equipment"`
+	Map       *mongodb.Map         `bson:"map"`
 }
 
 // Views define

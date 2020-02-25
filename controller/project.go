@@ -52,11 +52,11 @@ func QueryProjects(condition []*mongodb.Value) []model.Project {
 // InsertProject handle
 func InsertProject(project *model.Project) bool {
 	err := model.Insert("Platform", "Projects", bson.M{
-		"user":  project.User,
-		"score": 0,
-		"title": project.Title,
-		"ip":    project.IP,
-		"map":   project.Map,
+		"user":      project.User,
+		"score":     0,
+		"title":     project.Title,
+		"equipment": project.Equipment,
+		"map":       project.Map,
 	})
 	if err != nil {
 		return false

@@ -18,12 +18,12 @@ func (u *MongoDBService) QueryProjects(condition *mongodb.Condition, stream mong
 	result := controller.QueryProjects(condition.Value)
 	for _, val := range result {
 		if err := stream.Send(&mongodb.ProjectInformation{
-			Id:    val.ID,
-			User:  val.User,
-			Score: val.Score,
-			Title: val.Title,
-			Ip:    val.IP,
-			Map:   val.Map,
+			Id:        val.ID,
+			User:      val.User,
+			Score:     val.Score,
+			Title:     val.Title,
+			Equipment: val.Equipment,
+			Map:       val.Map,
 		}); err != nil {
 			return err
 		}
@@ -35,11 +35,11 @@ func (u *MongoDBService) QueryProjects(condition *mongodb.Condition, stream mong
 // InsertProject method
 func (u *MongoDBService) InsertProject(ctx context.Context, project *mongodb.ProjectInformation) (*mongodb.Result, error) {
 	result := controller.InsertProject(&model.Project{
-		User:  project.User,
-		Score: project.Score,
-		Title: project.Title,
-		IP:    project.Ip,
-		Map:   project.Map,
+		User:      project.User,
+		Score:     project.Score,
+		Title:     project.Title,
+		Equipment: project.Equipment,
+		Map:       project.Map,
 	})
 	return &mongodb.Result{
 		IsVaild: result,
@@ -50,12 +50,12 @@ func (u *MongoDBService) InsertProject(ctx context.Context, project *mongodb.Pro
 // UpdateProject method
 func (u *MongoDBService) UpdateProject(ctx context.Context, message *mongodb.UpdateMessage) (*mongodb.Result, error) {
 	result := controller.UpdateProject(message.Condition.Value, message.Key, bson.M{
-		"_id":   message.Value.Id,
-		"user":  message.Value.User,
-		"title": message.Value.Title,
-		"score": message.Value.Score,
-		"ip":    message.Value.Ip,
-		"map":   message.Value.Map,
+		"_id":       message.Value.Id,
+		"user":      message.Value.User,
+		"title":     message.Value.Title,
+		"score":     message.Value.Score,
+		"equipment": message.Value.Equipment,
+		"map":       message.Value.Map,
 	})
 	return &mongodb.Result{
 		IsVaild: result,
