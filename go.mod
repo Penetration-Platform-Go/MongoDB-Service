@@ -3,11 +3,10 @@ module github.com/Penetration-Platform-Go/MongoDB-Service
 go 1.12
 
 require (
-	cloud.google.com/go v0.53.0 // indirect
-	cloud.google.com/go/datastore v1.1.0 // indirect
+	cloud.google.com/go/storage v1.6.0 // indirect
 	dmitri.shuralyov.com/gpu/mtl v0.0.0-20191203043605-d42048ed14fd // indirect
 	github.com/DataDog/datadog-go v3.4.0+incompatible // indirect
-	github.com/Penetration-Platform-Go/gRPC-Files v0.0.0-20200224114053-5eb74d57da4b
+	github.com/Penetration-Platform-Go/gRPC-Files v0.0.0-20200226071309-4f27e3831bc0
 	github.com/Shopify/sarama v1.26.1 // indirect
 	github.com/alecthomas/units v0.0.0-20190924025748-f65c72e2690d // indirect
 	github.com/antihax/optional v1.0.0 // indirect
@@ -15,7 +14,7 @@ require (
 	github.com/armon/go-metrics v0.3.2 // indirect
 	github.com/armon/go-radix v1.0.0 // indirect
 	github.com/aws/aws-lambda-go v1.14.0 // indirect
-	github.com/aws/aws-sdk-go v1.29.9 // indirect
+	github.com/aws/aws-sdk-go v1.29.10 // indirect
 	github.com/aws/aws-sdk-go-v2 v0.19.0 // indirect
 	github.com/casbin/casbin/v2 v2.2.1 // indirect
 	github.com/circonus-labs/circonusllhist v0.1.4 // indirect
@@ -94,16 +93,14 @@ require (
 	go.uber.org/multierr v1.5.0 // indirect
 	go.uber.org/zap v1.14.0 // indirect
 	golang.org/x/crypto v0.0.0-20200221231518-2aa609cf4a9d // indirect
-	golang.org/x/exp v0.0.0-20200224162631-6cc2880d07d6 // indirect
 	golang.org/x/image v0.0.0-20200119044424-58c23975cae1 // indirect
 	golang.org/x/mobile v0.0.0-20200222142934-3c8601c510d0 // indirect
-	golang.org/x/net v0.0.0-20200222125558-5a598a2470a0 // indirect
-	golang.org/x/sys v0.0.0-20200223170610-d5e6a3e2c0ae // indirect
-	golang.org/x/tools v0.0.0-20200225022059-a0ec867d517c // indirect
-	google.golang.org/api v0.18.0 // indirect
-	google.golang.org/genproto v0.0.0-20200224152610-e50cd9704f63 // indirect
+	golang.org/x/net v0.0.0-20200226051749-491c5fce7268 // indirect
+	golang.org/x/tools v0.0.0-20200225230052-807dcd883420 // indirect
+	google.golang.org/api v0.19.0 // indirect
+	google.golang.org/appengine v1.6.5 // indirect
+	google.golang.org/genproto v0.0.0-20200225123651-fc8f55426688 // indirect
 	google.golang.org/grpc v1.27.1
 	gopkg.in/ini.v1 v1.52.0 // indirect
-	honnef.co/go/tools v0.0.1-2020.1.3 // indirect
 	rsc.io/sampler v1.99.99 // indirect
 )
